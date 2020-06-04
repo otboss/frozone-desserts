@@ -14,7 +14,7 @@ class Card extends Component {
 
                 </div>
                 <div className="textColor" style={{padding: '5px 10px'}}>
-                    <span>Sandwich</span>
+                    <span>Single Scoop</span>
                 </div>
             </SimpleCard>
         );
