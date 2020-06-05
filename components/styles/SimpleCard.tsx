@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const SimpleCard =  styled.div`
+const SimpleCard = styled.div`
     width: 150px;
     height: 160px;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
@@ -10,6 +10,8 @@ const SimpleCard =  styled.div`
     &: hover {
         opacity: 0.8;
     }
+    display: flex;
+    flex-direction: column;
 `;
 
 export default SimpleCard;
