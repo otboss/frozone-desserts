@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import Link from 'next/link';
 import { RouteMapper } from '../misc/RouteMapper';
 import { AssetMapper } from '../misc/AssetMapper';
-import { PopularSelections } from './PopularSelections';
 
 const CartButton = styled.button`
     border: none;
@@ -16,7 +15,10 @@ const CartButton = styled.button`
     }
 `;
 
-export class Header extends Component {
+
+export let searchQuery: string = "";
+
+export default class Header extends Component {
 
     constructor(props) {
         super(props);
@@ -26,8 +28,10 @@ export class Header extends Component {
     private static searchQuery: string = "";
 
     public updateSearchQuery = async (event: any) => {
-        Header.searchQuery = event.target.value;
-        this.setState({ searchQuery: event.target.value });
+        const eventVal = event.target.value;
+        this.setState({ searchQuery: event.target.value }, () => {
+            Header.searchQuery = eventVal;
+        });
         event.preventDefault();
     }
 
@@ -39,15 +43,20 @@ export class Header extends Component {
     render() {
         return (
             <div style={{ width: '100%' }}>
+                {this.state["searchQuery"]}
                 <header style={{ width: '100%', padding: '0 10px' }}>
                     <div style={{ display: 'flex', alignItems: 'center', height: '100%', width: '100%', flexWrap: 'wrap', flexDirection: 'row' }}>
                         <div style={{ width: '0', flex: '1', display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-                            <div style={{ width: '0', flex: '0' }}>
-                                <img style={{ width: '120px' }} src="/cream-truck.png" />
-                            </div>
-                            <div style={{ width: '0', flex: '0' }}>
-                                <span style={{ transform: 'skew(-7deg)', color: Theme.accentColor, fontSize: '20px' }}>Frozone</span>
-                            </div>
+                            <Link href={RouteMapper.index}>
+                                <a style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+                                    <div style={{ width: '0', flex: '0' }}>
+                                        <img style={{ width: '120px' }} src="/cream-truck.png" />
+                                    </div>
+                                    <div style={{ width: '0', flex: '0' }}>
+                                        <span style={{ transform: 'skew(-7deg)', color: Theme.accentColor, fontSize: '20px' }}>Frozone</span>
+                                    </div>
+                                </a>
+                            </Link>
                         </div>
                         <div style={{ width: '100%', flex: '5', display: 'flex', flexDirection: 'row' }}>
                             <div style={{ flex: '10' }}></div>

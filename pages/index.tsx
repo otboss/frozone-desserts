@@ -1,28 +1,29 @@
-import Head from 'next/head';
-import { Header } from '../components/Header';
 import { PopularSelections } from '../components/PopularSelections';
 import Layout from '../components/Layout';
-import injectGlobal from 'styled-components';
 import { Theme } from '../components/styles/Theme';
-import styled from 'styled-components';
+import { Component } from 'react';
+import GlobalStyle from '../components/styles/GlobalStyle';
 
 // injectGlobal`
-//   body{
-//     margin: 0;
-//     padding: 0;
-//   }
+// *{
+
+// }
 // `;
 
-const largeScreen = styled.div`
-`;
 
-export default function Home() {
-  return (
-    <Layout>
-      <div style={{ fontSize: '20px', color: Theme.textColor, padding: '20px 20px' }}>
-        <span>Popular Choices</span>
-      </div>
-      <PopularSelections></PopularSelections>
-    </Layout>
-  )
+export default class Home extends Component {
+  render() {
+    return (
+      <GlobalStyle>
+        <Layout>
+          {/* <div style={{ borderTop: '1px solid lightgray', margin: '10px 0', padding: '10px 0 20px 0', borderBottom: '1px solid lightgray' }}> */}
+          <div style={{ fontSize: '20px', color: Theme.textColor, padding: '20px 20px' }}>
+            <span>Popular Choices</span>
+          </div>
+          <PopularSelections></PopularSelections>
+          {/* </div> */}
+        </Layout>
+      </GlobalStyle>
+    );
+  }
 }

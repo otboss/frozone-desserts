@@ -3,7 +3,7 @@ import React from 'react';
 import SimpleCard from './styles/SimpleCard';
 import styled from 'styled-components';
 import Head from 'next/head';
-import { Header } from './Header';
+import Header from './Header';
 
 
 const Layout = (props) => (
