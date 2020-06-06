@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component, useContext } from 'react';
 import Card from './Card';
 import styled from 'styled-components';
 import { IceCream } from '../misc/IceCream';
+import { SearchQueryContext } from './Layout';
 
 const OuterDiv = styled.div`
     width: 100%;
@@ -50,7 +51,7 @@ let popularSelectionsTemplate: Array<JSX.Element> = [];
 export const refreshDisplayedSelections = function (searchFilter: string = "") {
     popularSelectionsTemplate = [];
     for (var x = 0; x < popularSelections.length; x++) {
-        if (popularSelections[x].name.indexOf(searchFilter) != -1) {
+        if (popularSelections[x].name.toLowerCase().indexOf(searchFilter.toLowerCase()) != -1) {
             popularSelectionsTemplate.push(
                 //@ts-ignore
                 <Card iceCream={
@@ -68,7 +69,10 @@ export const refreshDisplayedSelections = function (searchFilter: string = "") {
 }
 
 const PopularSelections = (props) => {
-    refreshDisplayedSelections();
+    //@ts-ignore
+    const [searchQuery, setSearchQuery] = useContext(SearchQueryContext);
+
+    refreshDisplayedSelections(searchQuery);
     return (
         <OuterDiv>
             <InnerDiv>

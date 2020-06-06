@@ -35,7 +35,6 @@ const Layout = (props) => {
             `}</style>
                 <Header />
                 {props.children}
-                {searchQuery}
             </SearchQueryContext.Provider>
         </div>
     );
