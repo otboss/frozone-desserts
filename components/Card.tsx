@@ -3,22 +3,23 @@ import SimpleCard from './styles/SimpleCard';
 import { Theme } from './styles/Theme';
 import styled from 'styled-components';
 import { IceCream } from '../misc/IceCream';
-import Cart from '../pages/cart';
 
 
-const AddButton = styled.div`
-    color: ${Theme.brightBlue};
-    border-top: 1px solid ${Theme.brightBlue};
-    &:hover{
-        transition: background-color 0.5s ease;    
-        color: white;
-        background-color: ${Theme.brightBlue};
-    }
-`;
 
 
 const Card = (props) => {
     const iceCream: IceCream = props.iceCream;
+
+    const AddButton = styled.div`
+        color: ${Theme.brightBlue};
+        border-top: 1px solid ${Theme.brightBlue};
+        &:hover{
+            transition: background-color 0.5s ease;    
+            color: white;
+            background-color: ${Theme.brightBlue};
+        }
+    `;
+
     return (
         <SimpleCard>
             <div style={{ flex: '2', position: 'relative', textAlign: 'center' }}>
