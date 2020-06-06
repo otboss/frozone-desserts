@@ -7,21 +7,20 @@ import { AssetMapper } from '../misc/AssetMapper';
 import { SearchQueryContext } from './Layout';
 
 
+const CartButton = styled.button`
+    border: none;
+    color: ${Theme.accentColor};
+    background-color: transparent;
+    font-size: 20px;
+    img {
+        width: 25px;
+    }
+`;
+
 
 const Header = (props) => {
     //@ts-ignore
     const [searchQuery, setSearchQuery] = useContext(SearchQueryContext);
-
-    const CartButton = styled.button`
-        border: none;
-        color: ${Theme.accentColor};
-        background-color: transparent;
-        font-size: 20px;
-        img {
-            width: 25px;
-        }
-    `;
-
 
     return (
         <div style={{ width: '100%' }}>
