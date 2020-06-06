@@ -3,6 +3,7 @@ import SimpleCard from './styles/SimpleCard';
 import { Theme } from './styles/Theme';
 import styled from 'styled-components';
 import { IceCream } from '../misc/IceCream';
+import Cart from '../pages/cart';
 
 
 
@@ -19,6 +20,12 @@ const Card = (props) => {
             background-color: ${Theme.brightBlue};
         }
     `;
+
+    const addToCart = function () {
+        Cart.cart.push(iceCream);
+        console.log(Cart.cart)
+    }
+
 
     return (
         <SimpleCard>
@@ -51,7 +58,7 @@ const Card = (props) => {
                 ${iceCream.cost}
             </div>
             <div style={{ flex: '1' }}>
-                <AddButton onClick={(e) => this.addToCart()} style={{ height: '100%', width: '100%', display: 'flex', alignItems: 'center' }}>
+                <AddButton onClick={(e) => addToCart()} style={{ height: '100%', width: '100%', display: 'flex', alignItems: 'center' }}>
                     <div style={{ textAlign: 'center', width: '100%' }}>
                         <span>ADD</span>
                     </div>
