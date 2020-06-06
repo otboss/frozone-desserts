@@ -67,22 +67,17 @@ export const refreshDisplayedSelections = function (searchFilter: string = "") {
     }
 }
 
-export class PopularSelections extends Component {
-
-    constructor(props) {
-        super(props)
-        refreshDisplayedSelections();
-    }
-
-    render() {
-        return (
-            <OuterDiv>
-                <InnerDiv>
-                    <FlexBox>
-                        {popularSelectionsTemplate}
-                    </FlexBox>
-                </InnerDiv>
-            </OuterDiv>
-        );
-    }
+const PopularSelections = (props) => {
+    refreshDisplayedSelections();
+    return (
+        <OuterDiv>
+            <InnerDiv>
+                <FlexBox>
+                    {popularSelectionsTemplate}
+                </FlexBox>
+            </InnerDiv>
+        </OuterDiv>
+    );
 }
+
+export default PopularSelections;

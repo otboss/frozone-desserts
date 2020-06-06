@@ -1,8 +1,8 @@
-import { PopularSelections } from '../components/PopularSelections';
+import PopularSelections from '../components/PopularSelections';
 import Layout from '../components/Layout';
 import { Theme } from '../components/styles/Theme';
-import { Component } from 'react';
-import GlobalStyle from '../components/styles/GlobalStyle';
+import GlobalContext from '../components/GlobalContext';
+import React from 'react';
 
 // injectGlobal`
 // *{
@@ -10,20 +10,20 @@ import GlobalStyle from '../components/styles/GlobalStyle';
 // }
 // `;
 
+export const SearchQueryContext: React.Context<string> = React.createContext("");
 
-export default class Home extends Component {
-  render() {
-    return (
-      <GlobalStyle>
-        <Layout>
-          {/* <div style={{ borderTop: '1px solid lightgray', margin: '10px 0', padding: '10px 0 20px 0', borderBottom: '1px solid lightgray' }}> */}
-          <div style={{ fontSize: '20px', color: Theme.textColor, padding: '20px 20px' }}>
-            <span>Popular Choices</span>
-          </div>
-          <PopularSelections></PopularSelections>
-          {/* </div> */}
-        </Layout>
-      </GlobalStyle>
-    );
-  }
+const Index = (props): JSX.Element => {
+  return (
+    <GlobalContext>
+      {/* Layout contains the header */}
+      <Layout>
+        <div style={{ fontSize: '20px', color: Theme.textColor, padding: '20px 20px' }}>
+          <span>Popular Choices</span>
+        </div>
+        <PopularSelections></PopularSelections>
+      </Layout>
+    </GlobalContext>
+  );
 }
+
+export default Index;

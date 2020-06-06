@@ -2,6 +2,7 @@
 import Layout from '../components/Layout';
 import { Component } from 'react';
 import { IceCream } from '../misc/IceCream';
+import GlobalContext from '../components/GlobalContext';
 
 export class CartState {
     constructor(
@@ -10,6 +11,7 @@ export class CartState {
 }
 
 export default class Cart extends Component {
+    public static cart: Array<IceCream> = [];
     public static state: CartState = new CartState();
 
     constructor(props) {
@@ -19,8 +21,10 @@ export default class Cart extends Component {
 
     render() {
         return (
-            <Layout>
-            </Layout>
+            <GlobalContext>
+                <Layout>
+                </Layout>
+            </GlobalContext>
         )
     };
 }
