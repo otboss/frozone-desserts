@@ -145,7 +145,7 @@ export default class Sell extends Component {
                                         <span>Image</span>
                                     </div>
                                     <div>
-                                        <div style={{ border: '1px solid lightgray', width: '140px', height: '120px' }}>
+                                        <div style={{ border: '1px solid lightgray', width: '140px', height: '120px', opacity: this.state.uploading ? '0.8' : '1' }}>
                                             <img id="previewImage" style={{ width: '100%', height: '100%' }} src={this.state.image} />
                                         </div>
                                     </div>
