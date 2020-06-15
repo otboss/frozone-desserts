@@ -7,6 +7,7 @@ import React from "react";
 const GlobalStyles = styled.html`
 a{
     text-decoration: none;
+    color: inherit;
 }
 `;
 

@@ -17,6 +17,22 @@ const CartButton = styled.button`
     }
 `;
 
+const Navigation = styled.div`
+    flex: 1;
+    margin: 8px 13px 0 0;
+    nav {
+        span {
+            color: ${Theme.accentColor};
+            font-size: 18px;
+            cursor: pointer;
+            padding-right: 13px;
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+`;
+
 
 const Header = (props) => {
     //@ts-ignore
@@ -24,7 +40,7 @@ const Header = (props) => {
 
     return (
         <div style={{ width: '100%' }}>
-            <header style={{ width: '100%', padding: '0 10px' }}>
+            <header style={{ width: '100%', height: '100px', padding: '0 10px' }}>
                 <div style={{ display: 'flex', alignItems: 'center', height: '100%', width: '100%', flexWrap: 'wrap', flexDirection: 'row' }}>
                     <div style={{ width: '0', flex: '1', display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
                         <Link href={RouteMapper.index}>
@@ -40,6 +56,20 @@ const Header = (props) => {
                     </div>
                     <div style={{ width: '100%', flex: '5', display: 'flex', flexDirection: 'row' }}>
                         <div style={{ flex: '10' }}></div>
+                        <Navigation style={{ flex: '1' }}>
+                            <nav>
+                                <Link href={RouteMapper.index}>
+                                    <a>
+                                        <span>Buy</span>
+                                    </a>
+                                </Link>
+                                <Link href={RouteMapper.sell}>
+                                    <a>
+                                        <span>Sell</span>
+                                    </a>
+                                </Link>
+                            </nav>
+                        </Navigation>
                         <div style={{ flex: '1', textAlign: 'right' }}>
                             <input placeholder="Search" onChange={(e) => setSearchQuery(e.target.value)} />
                         </div>
