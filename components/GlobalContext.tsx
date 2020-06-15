@@ -1,6 +1,8 @@
 import { Component, useState } from "react";
 import styled from 'styled-components';
 import React from "react";
+import { ApolloProvider } from "react-apollo";
+import { ApolloClient } from "../misc/ApolloClient";
 
 
 
@@ -17,9 +19,11 @@ a{
 const GlobalContext = (props) => {
 
     return (
-        <GlobalStyles>
-            {props.children}
-        </GlobalStyles>
+        <ApolloProvider client={ApolloClient}>
+            <GlobalStyles>
+                {props.children}
+            </GlobalStyles>
+        </ApolloProvider>
     );
 }
 

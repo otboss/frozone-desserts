@@ -5,8 +5,11 @@ import { IceCream } from '../misc/IceCream';
 import GlobalContext from '../components/GlobalContext';
 import SellForm from '../components/styles/SellForm';
 import { Theme } from '../components/styles/Theme';
-import { Mutation } from 'react-apollo';
+import { Mutation, ApolloProvider } from 'react-apollo';
+import { Query } from 'react-apollo';
 import { Mutations } from '../misc/Mutations';
+import gql from 'graphql-tag';
+import { ApolloClient } from '../misc/ApolloClient';
 
 export class CartState {
     constructor(
@@ -125,9 +128,9 @@ export default class Sell extends Component {
                 <Layout>
                     {/*
                     //@ts-ignore */}
-                    {/* <Mutation query={Mutations.createIceCream} variables={this.state}>
+                    <Mutation mutation={Mutations.createIceCream} variables={this.state}>
 
-                    </Mutation> */}
+                    </Mutation>
                     <div style={{ display: 'flex', height: 'calc(100vh - 110px)', alignItems: 'center', justifyContent: 'center' }}>
                         <div>
                             <div style={{ fontSize: '20px', textAlign: 'center', margin: '10px 0' }}>
@@ -167,7 +170,6 @@ export default class Sell extends Component {
                             </SellForm>
                         </div>
                     </div>
-
                 </Layout>
             </GlobalContext>
         )
