@@ -78,7 +78,7 @@ export default class Sell extends Component {
             //@ts-ignore
             name: document.getElementById("nameField").value,
             //@ts-ignore
-            cost: document.getElementById("costField").value,
+            cost: parseFloat(document.getElementById("costField").value) * 100,
             //@ts-ignore
             image: document.getElementById("previewImage").src,
         }, function () {
@@ -101,17 +101,9 @@ export default class Sell extends Component {
                                 this.setState({
                                     uploading: true
                                 });
-                                await new Promise(function (resolve) {
-                                    setTimeout(function () {
-                                        resolve();
-                                    }, 500);
-                                });
                                 try {
                                     const result = await createIceCream();
                                     console.log(result);
-                                }
-                                catch (err) {
-                                    throw err
                                 }
                                 finally {
                                     this.setState({

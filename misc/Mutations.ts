@@ -7,7 +7,7 @@ export abstract class Mutations {
             $cost: Float!
             $image: String!
         ) {
-            createItem(
+            createIceCream(
                 name: $name
                 cost: $cost
                 toppings: []
