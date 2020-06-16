@@ -1,5 +1,4 @@
 import gql from 'graphql-tag';
-import { IceCream } from './IceCream';
 
 export abstract class Mutations {
     public static createIceCream = gql`
@@ -11,6 +10,8 @@ export abstract class Mutations {
             createItem(
                 name: $name
                 cost: $cost
+                toppings: []
+                rating: 0
                 image: $image
             ) {
                 name

@@ -5,7 +5,7 @@ import { IceCream } from '../misc/IceCream';
 import GlobalContext from '../components/GlobalContext';
 import SellForm from '../components/styles/SellForm';
 import { Theme } from '../components/styles/Theme';
-import { Mutation, ApolloProvider } from 'react-apollo';
+import { Mutation, ApolloProvider, MutationFunction } from 'react-apollo';
 import { Query } from 'react-apollo';
 import { Mutations } from '../misc/Mutations';
 import gql from 'graphql-tag';
@@ -86,42 +86,6 @@ export default class Sell extends Component {
         });
     }
 
-    /**
-     * Responsible for form data upload
-     * */
-    public submitForm() {
-        this.setState({
-            uploading: true
-        }, async function () {
-            await new Promise(function (resolve) {
-                setTimeout(function () {
-                    resolve();
-                }, 500);
-            });
-            const iceCream: IceCream = new IceCream(
-                //@ts-ignore
-                document.getElementById("nameField").value,
-                //@ts-ignore
-                parseFloat(document.getElementById("costField").value),
-                [],
-                //@ts-ignore
-                document.getElementById("previewImage").src,
-            );
-            console.log(iceCream);
-            try {
-                // await Mutations.createIceCream(iceCream);
-            }
-            catch (err) {
-                alert("Error Occurred");
-                return;
-            }
-            this.setState({
-                uploading: false
-            });
-            alert("Upload Successful");
-        });
-    }
-
     render() {
         return (
             <GlobalContext>
@@ -129,47 +93,75 @@ export default class Sell extends Component {
                     {/*
                     //@ts-ignore */}
                     <Mutation mutation={Mutations.createIceCream} variables={this.state}>
-
-                    </Mutation>
-                    <div style={{ display: 'flex', height: 'calc(100vh - 110px)', alignItems: 'center', justifyContent: 'center' }}>
-                        <div>
-                            <div style={{ fontSize: '20px', textAlign: 'center', margin: '10px 0' }}>
-                                Sell
-                            </div>
-                            <SellForm>
-                                <div>
-                                    <input id="nameField" placeholder="Name" disabled={this.state.uploading} onChange={(e) => this.handleFormChange()} value={this.state.name} />
-                                </div>
-                                <div>
-                                    <input id="costField" placeholder="Cost" type="number" disabled={this.state.uploading} onChange={(e) => this.handleFormChange()} value={this.state.cost} />
-                                </div>
-                                <div>
-                                    <div style={{ margin: '10px 0 10px 0' }}>
-                                        <span>Image</span>
-                                    </div>
-                                    <div>
-                                        <div style={{ border: '1px solid lightgray', width: '140px', height: '120px', opacity: this.state.uploading ? '0.8' : '1' }}>
-                                            <img id="previewImage" style={{ width: '100%', height: '100%' }} src={this.state.image} />
-                                        </div>
-                                    </div>
-                                    <input id="imageField" placeholder="Image" type="file" onChange={(e) => this.displayUploadedImage(e) && this.handleFormChange()} disabled={this.state.uploading} />
-                                </div>
-                                {
-                                    !this.state.uploading ?
-                                        (
-                                            <div style={{ padding: '10px', width: '100%', border: 'none', cursor: 'pointer', marginTop: '14px', backgroundColor: `${Theme.accentColor}`, color: 'white', textAlign: 'center' }} onClick={(e) => { this.submitForm() }}>
-                                                Submit
-                                            </div>
-                                        ) :
-                                        (
-                                            <div style={{ padding: '10px', width: '100%', border: 'none', cursor: 'pointer', marginTop: '14px', backgroundColor: `${Theme.accentColor}`, opacity: '0.8', color: 'white', textAlign: 'center' }}>
-                                                Submit
-                                            </div>
-                                        )
+                        {/*
+                    //@ts-ignore */}
+                        {(createIceCream, { loading, error }) => (
+                            <form onSubmit={async e => {
+                                e.preventDefault();
+                                this.setState({
+                                    uploading: true
+                                });
+                                await new Promise(function (resolve) {
+                                    setTimeout(function () {
+                                        resolve();
+                                    }, 500);
+                                });
+                                try {
+                                    const result = await createIceCream();
+                                    console.log(result);
                                 }
-                            </SellForm>
-                        </div>
-                    </div>
+                                catch (err) {
+                                    throw err
+                                }
+                                finally {
+                                    this.setState({
+                                        uploading: false
+                                    });
+                                }
+                            }}>
+                                <div style={{ display: 'flex', height: 'calc(100vh - 110px)', alignItems: 'center', justifyContent: 'center' }}>
+                                    <div>
+                                        <div style={{ fontSize: '20px', textAlign: 'center', margin: '10px 0' }}>
+                                            Sell
+                                    </div>
+                                        <SellForm>
+                                            <div>
+                                                <input id="nameField" name="name       " placeholder="Name" disabled={this.state.uploading} onChange={(e) => this.handleFormChange()} value={this.state.name} />
+                                            </div>
+                                            <div>
+                                                <input id="costField" name="cost" placeholder="Cost" type="number" disabled={this.state.uploading} onChange={(e) => this.handleFormChange()} value={this.state.cost} />
+                                            </div>
+                                            <div>
+                                                <div style={{ margin: '10px 0 10px 0' }}>
+                                                    <span>Image</span>
+                                                </div>
+                                                <div>
+                                                    <div style={{ border: '1px solid lightgray', width: '140px', height: '120px', opacity: this.state.uploading ? '0.8' : '1' }}>
+                                                        <img id="previewImage" style={{ width: '100%', height: '100%' }} src={this.state.image} />
+                                                    </div>
+                                                </div>
+                                                <input id="imageField" name="image" placeholder="Image" type="file" onChange={(e) => this.displayUploadedImage(e) && this.handleFormChange()} disabled={this.state.uploading} />
+                                            </div>
+                                            {
+                                                !this.state.uploading ?
+                                                    (
+                                                        <button type="submit" style={{ padding: '10px', width: '100%', border: 'none', cursor: 'pointer', marginTop: '14px', backgroundColor: `${Theme.accentColor}`, color: 'white', textAlign: 'center' }}>
+                                                            Submit
+                                                        </button>
+                                                    ) :
+                                                    (
+                                                        <div style={{ padding: '10px', width: '100%', border: 'none', cursor: 'pointer', marginTop: '14px', backgroundColor: `${Theme.accentColor}`, opacity: '0.8', color: 'white', textAlign: 'center' }}>
+                                                            Submit
+                                                        </div>
+                                                    )
+                                            }
+                                        </SellForm>
+                                    </div>
+                                </div>
+
+                            </form>
+                        )}
+                    </Mutation>
                 </Layout>
             </GlobalContext>
         )
