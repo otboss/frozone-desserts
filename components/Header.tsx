@@ -8,6 +8,7 @@ import { SearchQueryContext, CartItemCountContext } from './Layout';
 import { toggleClouder } from './Clouder';
 import { toggleProfileMenu } from './ProfileMenu';
 import Cart from '../pages/cart';
+import * as globalCart from '../misc/Cart';
 
 
 const CartButton = styled.button`
@@ -42,7 +43,7 @@ const Header = (props) => {
     const [searchQuery, setSearchQuery] = useContext(SearchQueryContext);
     //@ts-ignore
     const [cartItemCount, setCartItemCount] = useContext(CartItemCountContext);
-    setCartItemCount(Cart.cart.length);
+    setCartItemCount(globalCart.Cart.cartItems.length);
 
     return (
         <div style={{ width: '100%' }}>

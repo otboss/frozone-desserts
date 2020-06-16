@@ -1,5 +1,5 @@
 
-import Layout, { CartItemCountContext, CartItemsContext } from '../components/Layout';
+import Layout, { CartItemCountContext } from '../components/Layout';
 import { Component, useContext } from 'react';
 import { IceCream } from '../misc/IceCream';
 import GlobalContext from '../components/GlobalContext';
@@ -12,7 +12,7 @@ export class CartState {
 }
 
 export default class Cart extends Component {
-    public static cart: Array<IceCream> = [];
+    // public static cart: Array<IceCream> = [];
     public static state: CartState = new CartState();
 
     constructor(props) {

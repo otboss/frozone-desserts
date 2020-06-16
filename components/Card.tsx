@@ -4,6 +4,7 @@ import { Theme } from './styles/Theme';
 import styled from 'styled-components';
 import { IceCream } from '../misc/IceCream';
 import Cart from '../pages/cart';
+import * as globalCart from '../misc/Cart';
 
 
 const AddButton = styled.div`
@@ -20,8 +21,8 @@ const Card = (props) => {
     const iceCream: IceCream = props.iceCream;
 
     const addToCart = function () {
-        Cart.cart.push(iceCream);
-        console.log(Cart.cart)
+        globalCart.Cart.cartItems.push(iceCream);
+        console.log(globalCart.Cart.cartItems);
     }
 
 

@@ -1,8 +1,8 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import Card from './Card';
 import styled from 'styled-components';
 import { IceCream } from '../misc/IceCream';
-import { CartItemsContext } from './Layout';
+import * as globalCart from '../misc/Cart';
 
 const OuterDiv = styled.div`
     width: 100%;
@@ -33,20 +33,15 @@ const FlexBox = styled.div`
 
 
 export let reloadCardItems = function () { };
+// export const staticCartItems: Array<IceCream> = [];
 
 const Cart = (props) => {
-    //@ts-ignore
-    const [cartItems, setCartItems] = useContext(CartItemsContext);
-
     return (
         <OuterDiv>
             <InnerDiv>
                 <FlexBox>
                     {
-                        JSON.stringify(cartItems)
-                    }
-                    {
-                        cartItems.map(function (cartItem: IceCream) {
+                        globalCart.Cart.cartItems.map(function (cartItem: IceCream) {
                             return (
                                 <div>
                                     <Card iceCream={

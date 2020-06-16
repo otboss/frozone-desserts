@@ -2,9 +2,9 @@ import React, { Component, useContext } from 'react';
 import Card from './Card';
 import styled from 'styled-components';
 import { IceCream } from '../misc/IceCream';
-import { SearchQueryContext, CartItemCountContext, CartItemsContext } from './Layout';
-import Cart from '../pages/cart';
-import { reloadCardItems } from './Cart';
+import { SearchQueryContext, CartItemCountContext } from './Layout';
+import * as globalCart from '../misc/Cart';
+
 
 const OuterDiv = styled.div`
     width: 100%;
@@ -59,15 +59,13 @@ const PopularSelections = (props) => {
     const [searchQuery, setSearchQuery] = useContext(SearchQueryContext);
     //@ts-ignore
     const [cartItemCount, setCartItemCount] = useContext(CartItemCountContext);
-    //@ts-ignore
-    const [cartItems, setCartItems] = useContext(CartItemsContext);
 
     const refreshDisplayedSelectionsComp = function (searchFilter: string = "") {
         popularSelectionsTemplate = [];
         for (var x = 0; x < popularSelections.length; x++) {
             if (popularSelections[x].name.toLowerCase().indexOf(searchFilter.toLowerCase()) != -1) {
                 popularSelectionsTemplate.push(
-                    <div onClick={(e) => { setCartItemCount(Cart.cart.length); setCartItems(Cart.cart); }}>
+                    <div onClick={(e) => { setCartItemCount(globalCart.Cart.cartItems.length); }}>
                         <Card iceCream={
                             new IceCream(
                                 popularSelections[x].name,
