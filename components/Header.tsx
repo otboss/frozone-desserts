@@ -4,7 +4,10 @@ import styled from 'styled-components';
 import Link from 'next/link';
 import { RouteMapper } from '../misc/RouteMapper';
 import { AssetMapper } from '../misc/AssetMapper';
-import { SearchQueryContext } from './Layout';
+import { SearchQueryContext, CartItemCountContext } from './Layout';
+import { toggleClouder } from './Clouder';
+import { toggleProfileMenu } from './ProfileMenu';
+import Cart from '../pages/cart';
 
 
 const CartButton = styled.button`
@@ -37,6 +40,9 @@ const Navigation = styled.div`
 const Header = (props) => {
     //@ts-ignore
     const [searchQuery, setSearchQuery] = useContext(SearchQueryContext);
+    //@ts-ignore
+    const [cartItemCount, setCartItemCount] = useContext(CartItemCountContext);
+    setCartItemCount(Cart.cart.length);
 
     return (
         <div style={{ width: '100%' }}>
@@ -76,7 +82,7 @@ const Header = (props) => {
                         <div style={{ flex: '1.3', textAlign: 'right' }}>
                             <Link href={RouteMapper.cart}>
                                 <a>
-                                    <CartButton>
+                                    <CartButton style={{ position: 'relative', margin: '2px 0 0 0' }}>
                                         <div style={{ cursor: 'pointer', display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
                                             <div style={{ display: 'flex', flex: '0' }}>
                                                 <img src={AssetMapper.cart} />
@@ -85,9 +91,22 @@ const Header = (props) => {
                                                 <span>Cart</span>
                                             </div>
                                         </div>
+                                        {
+                                            cartItemCount > 0 ? (
+                                                <div style={{ position: "absolute", top: '10px', left: '3px', fontSize: '12px', backgroundColor: 'red', color: 'white', borderRadius: '100px', width: '20px', height: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                                    {cartItemCount}
+                                                </div>
+                                            ) : (
+                                                    <div></div>
+                                                )
+                                        }
+
                                     </CartButton>
                                 </a>
                             </Link>
+                        </div>
+                        <div style={{ flex: '0', width: '100%', padding: '0 10px 0 10px', cursor: 'pointer' }}>
+                            <img src="/profile.png" style={{ margin: '0 0 0 0', width: '28px' }} onClick={e => { toggleClouder(); toggleProfileMenu(); }} />
                         </div>
                     </div>
                 </div>

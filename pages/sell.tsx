@@ -82,7 +82,7 @@ export default class Sell extends Component {
             //@ts-ignore
             image: document.getElementById("previewImage").src,
         }, function () {
-            console.log(this.state)
+            console.log(this.state);
         });
     }
 

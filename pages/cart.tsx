@@ -1,8 +1,9 @@
 
-import Layout from '../components/Layout';
-import { Component } from 'react';
+import Layout, { CartItemCountContext, CartItemsContext } from '../components/Layout';
+import { Component, useContext } from 'react';
 import { IceCream } from '../misc/IceCream';
 import GlobalContext from '../components/GlobalContext';
+import * as cartComponent from '../components/Cart'
 
 export class CartState {
     constructor(
@@ -23,6 +24,7 @@ export default class Cart extends Component {
         return (
             <GlobalContext>
                 <Layout>
+                    <cartComponent.default></cartComponent.default>
                 </Layout>
             </GlobalContext>
         )

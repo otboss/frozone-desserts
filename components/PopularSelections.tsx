@@ -2,7 +2,9 @@ import React, { Component, useContext } from 'react';
 import Card from './Card';
 import styled from 'styled-components';
 import { IceCream } from '../misc/IceCream';
-import { SearchQueryContext } from './Layout';
+import { SearchQueryContext, CartItemCountContext, CartItemsContext } from './Layout';
+import Cart from '../pages/cart';
+import { reloadCardItems } from './Cart';
 
 const OuterDiv = styled.div`
     width: 100%;
@@ -48,31 +50,41 @@ const popularSelections: Array<IceCream> = [
 let popularSelectionsTemplate: Array<JSX.Element> = [];
 
 
-export const refreshDisplayedSelections = function (searchFilter: string = "") {
-    popularSelectionsTemplate = [];
-    for (var x = 0; x < popularSelections.length; x++) {
-        if (popularSelections[x].name.toLowerCase().indexOf(searchFilter.toLowerCase()) != -1) {
-            popularSelectionsTemplate.push(
-                //@ts-ignore
-                <Card iceCream={
-                    new IceCream(
-                        popularSelections[x].name,
-                        popularSelections[x].cost,
-                        popularSelections[x].toppings,
-                        popularSelections[x].image,
-                        popularSelections[x].rating
-                    )
-                }></Card>
-            )
-        }
-    }
-}
+export let refreshDisplayedSelections;
+
+let setCartItemCountVar;
 
 const PopularSelections = (props) => {
     //@ts-ignore
     const [searchQuery, setSearchQuery] = useContext(SearchQueryContext);
+    //@ts-ignore
+    const [cartItemCount, setCartItemCount] = useContext(CartItemCountContext);
+    //@ts-ignore
+    const [cartItems, setCartItems] = useContext(CartItemsContext);
 
-    refreshDisplayedSelections(searchQuery);
+    const refreshDisplayedSelectionsComp = function (searchFilter: string = "") {
+        popularSelectionsTemplate = [];
+        for (var x = 0; x < popularSelections.length; x++) {
+            if (popularSelections[x].name.toLowerCase().indexOf(searchFilter.toLowerCase()) != -1) {
+                popularSelectionsTemplate.push(
+                    <div onClick={(e) => { setCartItemCount(Cart.cart.length); setCartItems(Cart.cart); }}>
+                        <Card iceCream={
+                            new IceCream(
+                                popularSelections[x].name,
+                                popularSelections[x].cost,
+                                popularSelections[x].toppings,
+                                popularSelections[x].image,
+                                popularSelections[x].rating
+                            )
+                        } ></Card>
+                    </div>
+                )
+            }
+        }
+    }
+    refreshDisplayedSelections = refreshDisplayedSelectionsComp;
+    setCartItemCountVar = setCartItemCount
+    refreshDisplayedSelectionsComp(searchQuery);
     return (
         <OuterDiv>
             <InnerDiv>

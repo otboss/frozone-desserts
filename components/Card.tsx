@@ -56,7 +56,7 @@ const Card = (props) => {
                 ${iceCream.cost}
             </div>
             <div style={{ flex: '1' }}>
-                <AddButton onClick={(e) => addToCart()} style={{ height: '100%', width: '100%', display: 'flex', alignItems: 'center' }}>
+                <AddButton onClick={(e) => { addToCart() }} style={{ height: '100%', width: '100%', display: 'flex', alignItems: 'center' }}>
                     <div style={{ textAlign: 'center', width: '100%' }}>
                         <span>ADD</span>
                     </div>
