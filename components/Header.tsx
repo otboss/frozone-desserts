@@ -101,7 +101,6 @@ const Header = (props) => {
                                                     <div></div>
                                                 )
                                         }
-
                                     </CartButton>
                                 </a>
                             </Link>

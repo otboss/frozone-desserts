@@ -40,7 +40,7 @@ const Card = (props) => {
                         ) :
                         iceCream.image != "" ?
                             (
-                                <img src={iceCream.image} style={{ position: 'absolute', left: '50%', marginLeft: '-38px', height: '100%', width: 'calc(100% - 70px)' }} alt="NO IMAGE" />
+                                <img src={iceCream.image} style={{ position: 'absolute', left: '0', height: '100%', width: '100%', objectFit: 'contain', display: 'inline-block' }} alt="NO IMAGE" />
                             ) :
                             (
                                 <div style={{ textAlign: 'center', height: '100%', display: 'flex', alignItems: 'center' }}>
